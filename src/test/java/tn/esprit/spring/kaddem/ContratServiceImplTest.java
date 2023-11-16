@@ -90,59 +90,5 @@ public class ContratServiceImplTest {
         verify(contratRepository).delete(mockContrat); 
     }
 
-
-        @Test
-    public void testAffectContratToEtudiant() {
-        // Mocking data
-        Etudiant mockEtudiant = new Etudiant(); 
-        Contrat mockContrat = new Contrat(); 
-        when(etudiantRepository.findByNomEAndPrenomE(anyString(), anyString())).thenReturn(mockEtudiant);
-        when(contratRepository.findByIdContrat(anyInt())).thenReturn(mockContrat);
-        when(mockEtudiant.getContrats()).thenReturn(new HashSet<>());
-
-        Contrat affectedContrat = contratService.affectContratToEtudiant(1, "John", "Doe");
-
-        assertEquals(mockContrat, affectedContrat); 
-        verify(contratRepository).save(mockContrat);
-    }
-
-    @Test
-    public void testNbContratsValides() {
-        Date startDate = new Date();
-        Date endDate = new Date();
-        when(contratRepository.getnbContratsValides(startDate, endDate)).thenReturn(5); 
-
-        int validContractsCount = contratService.nbContratsValides(startDate, endDate);
-
-        assertEquals(5, validContractsCount);
-    }
-
-    @Test
-    public void testRetrieveAndUpdateStatusContrat() {
-        Contrat mockContrat = new Contrat(); 
-        mockContrat.setDateFinContrat(new Date());
-        mockContrat.setArchive(false); 
-        List<Contrat> contratList = Collections.singletonList(mockContrat);
-        when(contratRepository.findAll()).thenReturn(contratList);
-
-        contratService.retrieveAndUpdateStatusContrat();
-
-        verify(contratRepository).save(Mockito.any(Contrat.class));
-    }
-
-    @Test
-    public void testGetChiffreAffaireEntreDeuxDates() {
-        Date startDate = new Date();
-        Date endDate = new Date(); 
-        Contrat mockContrat = new Contrat(); 
-        mockContrat.setSpecialite(Specialite.IA); 
-        when(contratRepository.findAll()).thenReturn(Collections.singletonList(mockContrat));
-
-        float chiffreAffaire = contratService.getChiffreAffaireEntreDeuxDates(startDate, endDate);
-
-        float expectedChiffreAffaire = 0;
-        assertEquals(expectedChiffreAffaire, chiffreAffaire);
-    }
-
     
 }

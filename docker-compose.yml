@@ -31,6 +31,24 @@ services:
     volumes:
       - nexus_data:/nexus-data
 
+  sonarqube:
+    image: sonarqube
+    container_name: sonarqube
+    ports:
+      - "9000:9000"
+
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    ports:
+      - "9090:9090"
+
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    ports:
+      - "3000:3000"
+
 volumes:
   data:
   nexus_data:

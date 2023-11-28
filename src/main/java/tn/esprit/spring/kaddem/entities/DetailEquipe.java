@@ -5,14 +5,15 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 @Entity
-public class DetailEquipe implements Serializable{
+public class DetailEquipe implements Serializable {
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idDetailEquipe;
     private Integer salle;
     private String thematique;
-    @OneToOne(mappedBy="detailEquipe")
+    @OneToOne(mappedBy = "detailEquipe")
     private Equipe equipe;
+
     public DetailEquipe() {
         // TODO Auto-generated constructor stub
     }
@@ -41,18 +42,23 @@ public class DetailEquipe implements Serializable{
     public Integer getIdDetailEquipe() {
         return idDetailEquipe;
     }
+
     public void setIdDetailEquipe(Integer idDetailEquipe) {
         this.idDetailEquipe = idDetailEquipe;
     }
+
     public Integer getSalle() {
         return salle;
     }
+
     public void setSalle(Integer salle) {
         this.salle = salle;
     }
+
     public String getThematique() {
         return thematique;
     }
+
     public void setThematique(String thematique) {
         this.thematique = thematique;
     }

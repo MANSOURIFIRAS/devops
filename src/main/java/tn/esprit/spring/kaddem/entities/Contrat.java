@@ -9,9 +9,9 @@ import javax.persistence.*;
 
 @Entity
 @ToString
-public class Contrat implements Serializable{
+public class Contrat implements Serializable {
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idContrat;
     @Temporal(TemporalType.DATE)
     private Date dateDebutContrat;
@@ -29,7 +29,7 @@ public class Contrat implements Serializable{
     }
 
     public Contrat(Date dateDebutContrat, Date dateFinContrat, Specialite specialite, Boolean archive,
-                   Integer montantContrat) {
+            Integer montantContrat) {
         super();
         this.dateDebutContrat = dateDebutContrat;
         this.dateFinContrat = dateFinContrat;
@@ -39,7 +39,7 @@ public class Contrat implements Serializable{
     }
 
     public Contrat(Integer idContrat, Date dateDebutContrat, Date dateFinContrat, Specialite specialite,
-                   Boolean archive, Integer montantContrat) {
+            Boolean archive, Integer montantContrat) {
         super();
         this.idContrat = idContrat;
         this.dateDebutContrat = dateDebutContrat;
@@ -52,36 +52,47 @@ public class Contrat implements Serializable{
     public Integer getIdContrat() {
         return idContrat;
     }
+
     public void setIdContrat(Integer idContrat) {
         this.idContrat = idContrat;
     }
+
     public Date getDateDebutContrat() {
         return dateDebutContrat;
     }
+
     public void setDateDebutContrat(Date dateDebutContrat) {
         this.dateDebutContrat = dateDebutContrat;
     }
+
     public Date getDateFinContrat() {
         return dateFinContrat;
     }
+
     public void setDateFinContrat(Date dateFinContrat) {
         this.dateFinContrat = dateFinContrat;
     }
+
     public Specialite getSpecialite() {
         return specialite;
     }
+
     public void setSpecialite(Specialite specialite) {
         this.specialite = specialite;
     }
+
     public Boolean getArchive() {
         return archive;
     }
+
     public void setArchive(Boolean archive) {
         this.archive = archive;
     }
+
     public Integer getMontantContrat() {
         return montantContrat;
     }
+
     public void setMontantContrat(Integer montantContrat) {
         this.montantContrat = montantContrat;
     }
@@ -93,6 +104,5 @@ public class Contrat implements Serializable{
     public void setEtudiant(Etudiant etudiant) {
         this.etudiant = etudiant;
     }
-
 
 }

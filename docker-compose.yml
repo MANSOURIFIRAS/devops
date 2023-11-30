@@ -23,13 +23,13 @@ services:
     ports:
       - "5050:5050"
 
-  # kaddem:
-  #   image: firasmns/kaddem:latest
-  #   container_name: kaddem
-  #   ports:
-  #     - "8082:8082"
-  #   depends_on:
-  #     - postgres
+  kaddem:
+    image: firasmns/kaddem:latest
+    container_name: kaddem
+    ports:
+      - "8082:8082"
+    depends_on:
+      - postgres
 
   nexus:
     image: sonatype/nexus3

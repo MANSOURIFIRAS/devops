@@ -1,0 +1,64 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git url: 'https://github.com/MANSOURIFIRAS/devops.git', branch: 'main'
+            }
+        }
+
+        stage('Compile Code') {
+            steps {
+                sh 'mvn clean compile'
+            }
+        }
+        
+        stage('Code Quality Check') {
+            steps {
+                script {
+                    sh 'mvn sonar:sonar -Dsonar.projectKey=kaddem  -Dsonar.projectName=kaddem -Dsonar.host.url=http://localhost:9000/ -Dsonar.token=sqp_b7a82fa63f5feb114211d06c73d4d8344251c6fc'
+                }
+                
+            }
+        }
+        
+        stage('Unit Testing') {
+            steps {
+                sh 'mvn test'
+            }
+        }
+        
+        stage('Build') {
+            steps {
+                sh 'mvn clean package'
+            }
+        }
+        
+        
+        stage('Deploy On Nexus') {
+            steps {
+                sh 'mvn clean deploy'
+            }
+        }
+        stage('Build Docker Image') {
+            steps {
+                sh 'docker build -t kaddem .'
+            }
+        }
+        
+        stage('publish Docker Image On dockerHub') {
+            steps {
+                script{
+                    withCredentials([string(credentialsId: 'dockerhubpwd', variable: 'dockerhubpwd')]) {
+                        sh 'docker login -u mansourifiras9@gmail.com -p ${dockerhubpwd}'
+                    }
+                    
+                    sh 'docker tag kaddem firasmns/kaddem:latest'
+                    sh 'docker push firasmns/kaddem:latest'
+                }
+            }
+        }
+    }
+}
+
